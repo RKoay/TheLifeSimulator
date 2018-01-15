@@ -162,6 +162,7 @@
             this.nameinput.Name = "nameinput";
             this.nameinput.Size = new System.Drawing.Size(100, 22);
             this.nameinput.TabIndex = 13;
+            this.nameinput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nameinput_KeyDown);
             // 
             // mainMenu
             // 
