@@ -71,28 +71,39 @@ namespace TheLifeSimulator
         }
         public void houseRec(int x, int y, int w, int h)
         {
-            //creating method to create the needsbar
-            Graphics Draw = this.CreateGraphics();
+            Graphics onScreen = this.CreateGraphics(); //Sets up on-screen graphics 
+            Bitmap bm = new Bitmap(this.Width, this.Height); //bitmap area size of whole screen 
+            Graphics offScreen = Graphics.FromImage(bm); //Sets off-screen graphics to the bitmap 
             Pen draw = new Pen(Color.Black, 3);
             SolidBrush fill = new SolidBrush(Color.Gray);
-            Draw.DrawRectangle(draw, x, y, w, h);
-            Draw.FillRectangle(fill, x, y, w, h);
+            offScreen.DrawRectangle(draw, x, y, w, h);
+            offScreen.FillRectangle(fill, x, y, w, h);
 
+            onScreen.DrawImage(bm, 0, 0);
+            offScreen.Clear(Color.Black);
         }
         public void furnitureRec(SolidBrush fill, int x, int y, int w, int h)
         {
-            //creating method to create the needsbar
-            Graphics Draw = this.CreateGraphics();
+            Graphics onScreen = this.CreateGraphics(); //Sets up on-screen graphics 
+            Bitmap bm = new Bitmap(this.Width, this.Height); //bitmap area size of whole screen 
+            Graphics offScreen = Graphics.FromImage(bm); //Sets off-screen graphics to the bitmap 
             Pen draw = new Pen(Color.Black, 2);
-            Draw.DrawRectangle(draw, x, y, w, h);
-            Draw.FillRectangle(fill, x, y, w, h);
+            offScreen.DrawRectangle(draw, x, y, w, h);
+            offScreen.FillRectangle(fill, x, y, w, h);
+
+            onScreen.DrawImage(bm, 0, 0);
+            offScreen.Clear(Color.Black);
         }
         public void furnitureCir(int x, int y, int w, int h)
         {
-            //creating method to create the needsbar
-            Graphics Draw = this.CreateGraphics();
+            Graphics onScreen = this.CreateGraphics(); //Sets up on-screen graphics 
+            Bitmap bm = new Bitmap(this.Width, this.Height); //bitmap area size of whole screen 
+            Graphics offScreen = Graphics.FromImage(bm); //Sets off-screen graphics to the bitmap 
             Pen draw = new Pen(Color.Black, 2);
-            Draw.DrawEllipse(draw, x, y, w, h);
+            offScreen.DrawEllipse(draw, x, y, w, h);
+
+            onScreen.DrawImage(bm, 0, 0);
+            offScreen.Clear(Color.Black);
         }
 
         public void interactiveObjects(int x, int y, int w, int h)
