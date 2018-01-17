@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainMenu));
             this.titleLabel = new System.Windows.Forms.Label();
             this.startLabel = new System.Windows.Forms.Label();
             this.howtoplaylabel = new System.Windows.Forms.Label();
@@ -42,6 +44,7 @@
             this.bankLabel = new System.Windows.Forms.Label();
             this.bankmoneyLabel = new System.Windows.Forms.Label();
             this.nameinput = new System.Windows.Forms.MaskedTextBox();
+            this.simulatorClock = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // titleLabel
@@ -184,9 +187,12 @@
             this.Controls.Add(this.howtoplaylabel);
             this.Controls.Add(this.startLabel);
             this.Controls.Add(this.titleLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "mainMenu";
             this.Text = "mainMenu";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.mainMenu_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainMenu_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mainMenu_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,6 +214,7 @@
         private System.Windows.Forms.Label bankLabel;
         private System.Windows.Forms.Label bankmoneyLabel;
         private System.Windows.Forms.MaskedTextBox nameinput;
+        private System.Windows.Forms.Timer simulatorClock;
     }
 }
 

@@ -14,6 +14,10 @@ namespace TheLifeSimulator
     {
         int scene = 1;
         string username;
+        Boolean leftArrowDown, downArrowDown, rightArrowDown, upArrowDown;
+        int drawX = 728;
+        int drawY = 165;
+        SolidBrush mainCharacter = new SolidBrush(Color.Yellow);
 
         public mainMenu()
         {
@@ -90,6 +94,7 @@ namespace TheLifeSimulator
             Pen draw = new Pen(Color.Black, 2);
             Draw.DrawEllipse(draw, x, y, w, h);
         }
+
         public void interactiveObjects(int x, int y, int w, int h)
         {
             //creating interactive furnitures
@@ -97,8 +102,35 @@ namespace TheLifeSimulator
 
         }
 
+        private void mainMenu_Paint(object sender, PaintEventArgs e)
+        {
+            if (scene == 10)
+            {
+                e.Graphics.FillRectangle(mainCharacter, drawX, drawY, 20, 20);
+            }
+            
+        }
+        private void mainMenu_KeyUp(object sender, KeyEventArgs e)
+        {
 
-        private void mainMenu_KeyDown(object sender, KeyEventArgs e)
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    leftArrowDown = false;
+                    break;
+                case Keys.Right:
+                    rightArrowDown = false;
+                    break;
+                case Keys.Up:
+                    upArrowDown = false;
+                    break;
+                case Keys.Down:
+                    downArrowDown = false;
+                    break;
+            }
+        }
+
+            private void mainMenu_KeyDown(object sender, KeyEventArgs e)
         {
             Graphics Draw = this.CreateGraphics();
 
@@ -124,6 +156,39 @@ namespace TheLifeSimulator
             }
             if (e.KeyCode == Keys.I)
             {
+            }
+
+            //character 
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    leftArrowDown = true;
+                    break;
+                case Keys.Down:
+                    downArrowDown = true;
+                    break;
+                case Keys.Right:
+                    rightArrowDown = true;
+                    break;
+                case Keys.Up:
+                    upArrowDown = true;
+                    break;
+            }
+            if (leftArrowDown == true)
+            {
+                drawX = drawX - 3;
+            }
+            if (rightArrowDown == true)
+            {
+                drawX = drawX + 3;
+            }
+            if (upArrowDown == true)
+            {
+                drawY = drawY - 3;
+            }
+            if (downArrowDown == true)
+            {
+                drawY = drawY + 3;
             }
 
             switch (scene)
@@ -338,7 +403,12 @@ namespace TheLifeSimulator
                     username = nameinput.Text;
                     break;
                 case 10://girlone house scene
+                    Graphics onScreen = this.CreateGraphics(); //Sets up on-screen graphics 
+                    Bitmap bm = new Bitmap(this.Width, this.Height); //bitmap area size of whole screen 
+                    Graphics offScreen = Graphics.FromImage(bm); //Sets off-screen graphics to the bitmap 
 
+                    this.BackColor = Color.AntiqueWhite;
+                    Refresh();
                     bankLabel.Location = new Point(400, 420);
                     bankLabel.BackColor = Color.Pink;
                     bankLabel.Text = "Bank";
@@ -389,41 +459,70 @@ namespace TheLifeSimulator
                     instructionlabel.Visible = true;///
                     nameinput.Visible = false;///
 
-                    Draw.DrawRectangle(draw, 12, 5, 746, 385); 
-                    Draw.FillRectangle(fill, 12, 5, 746, 385);
+                    Pen draw = new Pen(Color.Black, 3);
+                    SolidBrush fill = new SolidBrush(Color.Black);
+                    offScreen.DrawRectangle(draw, 0, 0, 12, 390);
+                    offScreen.FillRectangle(fill, 0, 0, 12, 390);
+                    offScreen.DrawRectangle(draw, 0, 0, 1044, 5);
+                    offScreen.FillRectangle(fill, 0, 0, 1044, 5);
+
+                    offScreen.DrawRectangle(draw, 758, 0, 12, 390);
+                    offScreen.FillRectangle(fill, 758, 0, 12, 390);
+                    offScreen.DrawRectangle(draw, 0, 390, 1044, 8);
+                    offScreen.FillRectangle(fill, 0, 390, 1044, 8);
+
+                    onScreen.DrawImage(bm, 0, 0);
+                    offScreen.Clear(Color.Black);
+
                     //drawhouse
                     //Room 1
-                    interactiveObjects(62, 45, 150, 120);//design/patterns needeed
+
                     fill = new SolidBrush(Color.SaddleBrown);
                     furnitureRec(fill, 32, 5, 30, 40);
                     furnitureRec(fill, 212, 5, 30, 40);
-                    fill = new SolidBrush(Color.LightCoral);
-                    furnitureRec(fill, 37, 145, 200, 20);
-                    fill = new SolidBrush(Color.LightBlue);
-                    furnitureRec(fill, 87, 150, 100, 10);
                     fill = new SolidBrush(Color.SaddleBrown);
                     furnitureRec(fill, 47, 185, 180, 40);
                     fill = new SolidBrush(Color.Beige);
                     furnitureRec(fill, 82, 15, 50, 20);
                     furnitureRec(fill, 142, 15, 50, 20);
+
+                    interactiveObjects(62, 45, 150, 120);//design/patterns needeed
+                    fill = new SolidBrush(Color.Coral);
+                    furnitureRec(fill, 62, 45, 150, 120);
+
                     interactiveObjects(62, 45, 150, 10);//Need to be colored
+                    fill = new SolidBrush(Color.LightBlue);
+                    furnitureRec(fill, 62, 45, 150, 10);
+
                     interactiveObjects(62, 55, 150, 80);
+                    fill = new SolidBrush(Color.Coral);
+                    furnitureRec(fill, 62, 55, 150, 80);
                     //Room 2
                     interactiveObjects(17, 290, 60, 100);
+                    fill = new SolidBrush(Color.White);
+                    furnitureRec(fill, 17, 290, 60, 100);
+
                     fill = new SolidBrush(Color.LightGray);
                     furnitureRec(fill, 22, 305, 50, 70);
                     fill = new SolidBrush(Color.White);
                     furnitureRec(fill, 202, 230, 60, 40);
                     fill = new SolidBrush(Color.LightGray);
                     furnitureRec(fill, 207, 245, 50, 20);
+
                     interactiveObjects(207, 350, 50, 30);
+                    fill = new SolidBrush(Color.White);
+                    furnitureRec(fill, 207, 350, 50, 30);
+
                     interactiveObjects(202, 380, 60, 10);
+                    fill = new SolidBrush(Color.White);
+                    furnitureRec(fill, 202, 380, 60, 10);
+
                     fill = new SolidBrush(Color.LightGray);
                     furnitureRec(fill, 212, 360, 40, 20);
                     fill = new SolidBrush(Color.White);
                     furnitureRec(fill, 230, 240, 4, 8);
                     furnitureRec(fill, 45, 300, 4, 8);
-                    furnitureCir(212, 240, 4, 4);
+                    furnitureCir(207, 240, 4, 4);
                     furnitureCir(253, 240, 4, 4);
                     furnitureCir(22, 300, 4, 4);
                     furnitureCir(68, 300, 4, 4);
@@ -448,27 +547,50 @@ namespace TheLifeSimulator
                     furnitureCir(628, 350, 20, 10);
                     furnitureCir(593, 375, 20, 10);
                     furnitureCir(628, 375, 20, 10);
+
+                    fill = new SolidBrush(Color.White);
                     interactiveObjects(708, 340, 50, 50);
-                    interactiveObjects(708, 320, 50, 20);
-                    fill = new SolidBrush(Color.SandyBrown);
-                    furnitureRec(fill, 458, 250, 200, 60);
+                    furnitureRec(fill, 708, 340, 50, 50);
+                    
+                    interactiveObjects(708, 330, 50, 10);
+                    furnitureRec(fill, 708, 330, 50, 10);
+
                     fill = new SolidBrush(Color.Brown);
-                    furnitureRec(fill, 483, 245, 10, 10);
-                    furnitureRec(fill, 518, 245, 10, 10);
-                    furnitureRec(fill, 553, 245, 10, 10);
-                    furnitureRec(fill, 588, 245, 10, 10);
-                    furnitureRec(fill, 623, 245, 10, 10);
+                    furnitureRec(fill, 468, 260, 30, 20);
+                    furnitureRec(fill, 518, 260, 30, 20);
+                    fill = new SolidBrush(Color.SandyBrown);
+                    furnitureRec(fill, 458, 270, 100, 40);
+
                     //Room 4
-                    interactiveObjects(403, 55, 60, 20);
-                    interactiveObjects(403, 155, 60, 20);
-                    interactiveObjects(413, 75, 50, 40);
-                    interactiveObjects(413, 115, 50, 40);
-                    interactiveObjects(443, 75, 20, 80);
+                    fill = new SolidBrush(Color.LightSalmon);
+                    interactiveObjects(483, 55, 60, 20);
+                    furnitureRec(fill, 483, 55, 60, 20);
+
+                    interactiveObjects(483, 155, 60, 20);
+                    furnitureRec(fill, 483, 155, 60, 20);
+
+                    fill = new SolidBrush(Color.LightSkyBlue);
+                    interactiveObjects(493, 75, 50, 40);
+                    furnitureRec(fill, 493, 75, 50, 40);
+
+                    interactiveObjects(493, 115, 50, 40);
+                    furnitureRec(fill, 493, 115, 50, 40);
+
+                    fill = new SolidBrush(Color.DarkBlue);
+                    interactiveObjects(523, 75, 20, 80);
+                    furnitureRec(fill, 523, 75, 20, 80);
+
                     fill = new SolidBrush(Color.DimGray);
-                    furnitureRec(fill, 323, 70, 20, 80);
-                    furnitureCir(353, 60, 40, 40);
+                    furnitureRec(fill, 363, 70, 20, 80);
+
+                    fill = new SolidBrush(Color.Brown);
                     interactiveObjects(708, 55, 20, 20);
+                    furnitureRec(fill, 708, 55, 20, 20);
+
+                    fill = new SolidBrush(Color.White);
                     interactiveObjects(718, 25, 40, 80);
+                    furnitureRec(fill, 718, 25, 40, 80);
+
                     fill = new SolidBrush(Color.Gray);
                     furnitureRec(fill, 733, 55, 15, 20);
 
@@ -481,7 +603,9 @@ namespace TheLifeSimulator
                     houseRec(308, 225, 200, 5);
                     houseRec(558, 225, 200, 5);
                     houseRec(308, 125, 5, 265);
+
                     break;
+
                 case 11://guyone house scene
                     bankLabel.Location = new Point(400, 420);
                     bankLabel.BackColor = Color.LightBlue;
@@ -650,6 +774,7 @@ namespace TheLifeSimulator
             }
 
         }
+
 
         private void nameinput_KeyDown(object sender, KeyEventArgs e)
         {
