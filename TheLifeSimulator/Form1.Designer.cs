@@ -167,11 +167,15 @@
             this.nameinput.TabIndex = 13;
             this.nameinput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nameinput_KeyDown);
             // 
+            // simulatorClock
+            // 
+            this.simulatorClock.Interval = 10;
+            // 
             // mainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1026, 687);
             this.Controls.Add(this.nameinput);
             this.Controls.Add(this.bankmoneyLabel);
@@ -187,6 +191,7 @@
             this.Controls.Add(this.howtoplaylabel);
             this.Controls.Add(this.startLabel);
             this.Controls.Add(this.titleLabel);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "mainMenu";
             this.Text = "mainMenu";
