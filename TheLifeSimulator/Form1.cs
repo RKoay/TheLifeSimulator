@@ -17,11 +17,15 @@ namespace TheLifeSimulator
         Boolean leftArrowDown, downArrowDown, rightArrowDown, upArrowDown;
         int drawX = 728;
         int drawY = 165;
-        SolidBrush mainCharacter = new SolidBrush(Color.Yellow);
+        SolidBrush mainCharacterOne = new SolidBrush(Color.Tan);
+        SolidBrush mainCharacterTwo = new SolidBrush(Color.Black);
+        SolidBrush mainCharacterThr = new SolidBrush(Color.LightYellow);
+        SolidBrush mainCharacterFou = new SolidBrush(Color.SandyBrown);
         int bankSavings;
         Graphics onScreen, offScreen;
         Bitmap bm;
-        bool firstTime = true;
+        Rectangle mainCharacter;
+        
 
         public mainMenu()
         {
@@ -189,8 +193,8 @@ namespace TheLifeSimulator
                 e.Graphics.DrawEllipse(draw, 513, 380, 4, 4);
                 e.Graphics.DrawEllipse(draw, 574, 380, 4, 4);
                 fill = new SolidBrush(Color.White);
-                e.Graphics.FillRectangle(fill, 544, 380, 4, 8);
-                e.Graphics.DrawRectangle(draw, 544, 380, 4, 8);
+                e.Graphics.FillRectangle(fill, 544, 372, 4, 8);
+                e.Graphics.DrawRectangle(draw, 544, 372, 4, 8);
                 fill = new SolidBrush(Color.Plum);
                 e.Graphics.FillRectangle(fill, 583, 340, 75, 50);
                 e.Graphics.DrawRectangle(draw, 583, 340, 75, 50);
@@ -281,18 +285,9 @@ namespace TheLifeSimulator
                 e.Graphics.FillRectangle(fill, 558, 225, 200, 5);
                 e.Graphics.FillRectangle(fill, 308, 125, 5, 265);
 
-
-                //onScreen.DrawImage(bm, 0, 0);
-                //offScreen.Clear(Color.AntiqueWhite);
-                //Refresh();
-
-                e.Graphics.FillRectangle(mainCharacter, drawX, drawY, 20, 20);
-                //Rectangle character = new Rectangle(drawX, drawY, 20, 20);
-            }
-            //if (interactiveFur.IntersectsWith(character))
-            //{
+                e.Graphics.FillRectangle(mainCharacterOne, drawX, drawY, 20, 20);
                 
-            //}
+            }
 
         }
         private void mainMenu_KeyUp(object sender, KeyEventArgs e)
@@ -648,6 +643,46 @@ namespace TheLifeSimulator
                         howtoplaylabel.Visible = false;///
                         instructionlabel.Visible = true;///
                         nameinput.Visible = false;///
+
+                    mainCharacter = new Rectangle(drawX, drawY, 20, 20);
+                    if (drawX < 12) { drawX = 12;}
+                    if (drawY < 5) { drawY = 5; }
+                    if (drawX > 262 && drawX < 264.5 && (drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330))
+                    {
+                        drawX = 262;
+                    }
+                    if (drawX > 264.5 && drawX < 267 && (drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330))
+                    {
+                        drawX = 270;
+                    }
+                    if (drawX > 308 && drawX < 310.5 && (drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330))
+                    {
+                        drawX = 308;
+                    }
+                    if (drawX > 310.5 && drawX < 313 && (drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330))
+                    {
+                        drawX = 313;
+                    }
+                    if (drawY > 225 && drawY < 227.5 && (drawX > 12 && drawX < 262 || drawX > 308 && drawX < 508 || drawX > 558 && drawX < 758))
+                    {
+                        drawY = 225;
+                    }
+                    if (drawY > 227.5 && drawY < 230)
+                    {
+                        drawY = 230;
+                    }
+                    if (drawX > 758) { drawX = 758; }
+                    if (drawY > 390) { drawY = 390; }
+                    
+                    //e.Graphics.DrawRectangle(draw, 12, 225, 255, 5);
+                    //e.Graphics.DrawRectangle(draw, 262, 5, 5, 80);
+                    //e.Graphics.DrawRectangle(draw, 262, 125, 5, 160);
+                    //e.Graphics.DrawRectangle(draw, 262, 330, 5, 60);
+                    //e.Graphics.DrawRectangle(draw, 308, 5, 5, 80);
+                    //e.Graphics.DrawRectangle(draw, 308, 225, 200, 5);
+                    //e.Graphics.DrawRectangle(draw, 558, 225, 200, 5);
+                    //e.Graphics.DrawRectangle(draw, 308, 125, 5, 265);
+
                     break;
                 case 11://guyone house scene
                     bankLabel.Location = new Point(400, 420);
