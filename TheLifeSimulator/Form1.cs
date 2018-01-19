@@ -25,7 +25,6 @@ namespace TheLifeSimulator
         Graphics onScreen, offScreen;
         Bitmap bm;
         Rectangle mainCharacter;
-        
 
         public mainMenu()
         {
@@ -81,6 +80,7 @@ namespace TheLifeSimulator
             Draw.FillRectangle(fillNeeds, workX, workY, 0, 20);
 
         }
+        
 
         private void mainMenu_Paint(object sender, PaintEventArgs e)
         {
@@ -645,34 +645,35 @@ namespace TheLifeSimulator
                         nameinput.Visible = false;///
 
                     mainCharacter = new Rectangle(drawX, drawY, 20, 20);
-                    if (drawX < 12) { drawX = 12;}
-                    if (drawY < 5) { drawY = 5; }
-                    if (drawX > 262 && drawX < 264.5 && (drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330))
-                    {
-                        drawX = 262;
-                    }
-                    if (drawX > 264.5 && drawX < 267 && (drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330))
-                    {
-                        drawX = 270;
-                    }
-                    if (drawX > 308 && drawX < 310.5 && (drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330))
-                    {
-                        drawX = 308;
-                    }
-                    if (drawX > 310.5 && drawX < 313 && (drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330))
-                    {
-                        drawX = 313;
-                    }
-                    if (drawY > 225 && drawY < 227.5 && (drawX > 12 && drawX < 262 || drawX > 308 && drawX < 508 || drawX > 558 && drawX < 758))
-                    {
-                        drawY = 225;
-                    }
-                    if (drawY > 227.5 && drawY < 230)
-                    {
-                        drawY = 230;
-                    }
-                    if (drawX > 758) { drawX = 758; }
-                    if (drawY > 390) { drawY = 390; }
+
+                    if (drawX < 14) { drawX = 14;}
+                    if (drawY < 7) { drawY = 7; }
+                    //if (drawX > 262 && drawX < 264.5 && drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330)
+                    //{
+                    //    drawX = 262;
+                    //}
+                    //if (drawX > 264.5 && drawX < 267 && drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330)
+                    //{
+                    //    drawX = 270;
+                    //}
+                    //if (drawX > 308 && drawX < 310.5 && drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330)
+                    //{
+                    //    drawX = 308;
+                    //}
+                    //if (drawX > 310.5 && drawX < 313 && drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330)
+                    //{
+                    //    drawX = 313;
+                    //}
+                    //if (drawY > 225 && drawY < 227.5 && (drawX > 12 && drawX < 262 || drawX > 308 && drawX < 508 || drawX > 558 && drawX < 758))
+                    //{
+                    //    drawY = 225;
+                    //}
+                    //if (drawY > 227.5 && drawY < 230)
+                    //{
+                    //    drawY = 230;
+                    //}
+                    if (drawX > 735) { drawX = 735; }
+                    if (drawY > 367) { drawY = 367; }
                     
                     //e.Graphics.DrawRectangle(draw, 12, 225, 255, 5);
                     //e.Graphics.DrawRectangle(draw, 262, 5, 5, 80);
@@ -682,6 +683,55 @@ namespace TheLifeSimulator
                     //e.Graphics.DrawRectangle(draw, 308, 225, 200, 5);
                     //e.Graphics.DrawRectangle(draw, 558, 225, 200, 5);
                     //e.Graphics.DrawRectangle(draw, 308, 125, 5, 265);
+                    Rectangle divisionOne = new Rectangle(12, 225, 255, 5);
+                    Rectangle divisionTwo = new Rectangle(262, 5, 5, 80);
+                    Rectangle divisionThree = new Rectangle(262, 125, 5, 160);
+                    Rectangle divisionFour = new Rectangle(262, 330, 5, 60);
+                    Rectangle divisionFive = new Rectangle(308, 5, 5, 80);
+                    Rectangle divisionSix = new Rectangle(308, 225, 200, 5);
+                    Rectangle divisionSeven = new Rectangle(558, 225, 200, 5);
+                    Rectangle divisionEight = new Rectangle(308, 125, 5, 265);
+
+                    if (divisionOne.IntersectsWith(mainCharacter))
+                    {
+                        if (drawY < 225) { drawY = 205; }
+                        if (drawY > 225) { drawY = 235; }
+                    }
+                    if (divisionTwo.IntersectsWith(mainCharacter))
+                    {
+                        if (drawX < 262) { drawX = 242; }
+                        if (drawX > 262) { drawX = 272; }
+                    }
+                    if (divisionThree.IntersectsWith(mainCharacter))
+                    {
+                        if (drawX < 262) { drawX = 242; }
+                        if (drawX > 262) { drawX = 272; }
+                    }
+                    if (divisionFour.IntersectsWith(mainCharacter))
+                    {
+                        if (drawX < 262) { drawX = 242; }
+                        if (drawX > 262) { drawX = 272; }
+                    }
+                    if (divisionFive.IntersectsWith(mainCharacter))
+                    {
+                        if (drawX < 308) { drawX = 288; }
+                        if (drawX > 308) { drawX = 318; }
+                    }
+                    if (divisionEight.IntersectsWith(mainCharacter))
+                    {
+                        if (drawX < 308) { drawX = 288; }
+                        if (drawX > 308) { drawX = 318; }
+                    }
+                    if (divisionSix.IntersectsWith(mainCharacter))
+                    {
+                        if (drawY < 225) { drawY = 205; }
+                        if (drawY > 225) { drawY = 235; }
+                    }
+                    if (divisionSeven.IntersectsWith(mainCharacter))
+                    {
+                        if (drawY < 225) { drawY = 205; }
+                        if (drawY > 225) { drawY = 235; }
+                    }
 
                     break;
                 case 11://guyone house scene
