@@ -648,41 +648,9 @@ namespace TheLifeSimulator
 
                     if (drawX < 14) { drawX = 14;}
                     if (drawY < 7) { drawY = 7; }
-                    //if (drawX > 262 && drawX < 264.5 && drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330)
-                    //{
-                    //    drawX = 262;
-                    //}
-                    //if (drawX > 264.5 && drawX < 267 && drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330)
-                    //{
-                    //    drawX = 270;
-                    //}
-                    //if (drawX > 308 && drawX < 310.5 && drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330)
-                    //{
-                    //    drawX = 308;
-                    //}
-                    //if (drawX > 310.5 && drawX < 313 && drawY < 85 || drawY > 125 && drawY < 285 || drawY > 330)
-                    //{
-                    //    drawX = 313;
-                    //}
-                    //if (drawY > 225 && drawY < 227.5 && (drawX > 12 && drawX < 262 || drawX > 308 && drawX < 508 || drawX > 558 && drawX < 758))
-                    //{
-                    //    drawY = 225;
-                    //}
-                    //if (drawY > 227.5 && drawY < 230)
-                    //{
-                    //    drawY = 230;
-                    //}
                     if (drawX > 735) { drawX = 735; }
                     if (drawY > 367) { drawY = 367; }
-                    
-                    //e.Graphics.DrawRectangle(draw, 12, 225, 255, 5);
-                    //e.Graphics.DrawRectangle(draw, 262, 5, 5, 80);
-                    //e.Graphics.DrawRectangle(draw, 262, 125, 5, 160);
-                    //e.Graphics.DrawRectangle(draw, 262, 330, 5, 60);
-                    //e.Graphics.DrawRectangle(draw, 308, 5, 5, 80);
-                    //e.Graphics.DrawRectangle(draw, 308, 225, 200, 5);
-                    //e.Graphics.DrawRectangle(draw, 558, 225, 200, 5);
-                    //e.Graphics.DrawRectangle(draw, 308, 125, 5, 265);
+
                     Rectangle divisionOne = new Rectangle(12, 225, 255, 5);
                     Rectangle divisionTwo = new Rectangle(262, 5, 5, 80);
                     Rectangle divisionThree = new Rectangle(262, 125, 5, 160);
@@ -732,6 +700,131 @@ namespace TheLifeSimulator
                         if (drawY < 225) { drawY = 205; }
                         if (drawY > 225) { drawY = 235; }
                     }
+
+                    //Room 1
+
+                    //e.Graphics.DrawRectangle(draw, 32, 5, 30, 40);
+                    Rectangle sidetableOne = new Rectangle(32, 5, 30, 40);
+                    //e.Graphics.DrawRectangle(draw, 212, 5, 30, 40);
+                    Rectangle sidetableTwo = new Rectangle(212, 5, 30, 40);
+                    //e.Graphics.DrawRectangle(draw, 47, 185, 180, 40);
+                    Rectangle dresser = new Rectangle(47, 185, 180, 40);
+                    //e.Graphics.DrawRectangle(draw, 82, 15, 50, 20);
+                    Rectangle pillowOne = new Rectangle(82, 15, 50, 20);
+                    //e.Graphics.DrawRectangle(draw, 142, 15, 50, 20);
+                    Rectangle pillowTwo = new Rectangle(142, 15, 50, 20);
+
+                    ////Objects(62, 45, 150, 120);
+                    Rectangle bed = new Rectangle(62, 45, 150, 120);
+
+                    //////Objects(62, 45, 150, 10);//Need to be colored
+                    //Rectangle topBlanket = new Rectangle(62, 45, 150, 10); inside bed
+                    //////Objects(62, 55, 150, 80);
+                    //Rectangle bottomBlanket = new Rectangle(62, 55, 150, 80); inside bed
+                    
+                    if (sidetableOne.IntersectsWith(mainCharacter))
+                    {
+                        if (drawX > 12)
+                        {
+                            drawX = 12;
+                        }
+                        if (drawX < 62)
+                        {
+                            drawX = 62;
+                        }
+                        if (drawY < 45)
+                        {
+                            drawY = 45;
+                        }
+                    }
+                    if (bed.IntersectsWith(mainCharacter))
+                    {
+                        if (drawX > 42 && drawX < 62)
+                        {
+                            drawX = 42;
+                        }
+                        if (drawX <= 212 && drawX > 62)
+                        {
+                            drawX = 212;
+                        }
+                        if (drawY < 165 && (drawX < 62 || drawX > 212))
+                        {
+                            drawY = 165;
+                        }
+                    }
+                    //Room 2
+                    ////interactiveObjects(17, 290, 60, 100);
+                    Rectangle tub = new Rectangle(17, 290, 60, 100);
+                    //e.Graphics.DrawRectangle(draw, 22, 305, 50, 70); inside tub
+
+                    //e.Graphics.DrawRectangle(draw, 202, 230, 60, 40);
+                    Rectangle sink = new Rectangle(202, 230, 60, 40);
+                    //e.Graphics.DrawRectangle(draw, 207, 245, 50, 20);
+                    Rectangle toiletTwo = new Rectangle(207, 245, 50, 20);
+
+                    ////interactiveObjects(207, 350, 50, 30); inside Sink
+
+                    ////interactiveObjects(202, 380, 60, 10);
+                    Rectangle toiletOne = new Rectangle(202, 380, 60, 10);
+                    //e.Graphics.DrawRectangle(draw, 212, 360, 40, 20); inside toilet
+                    //e.Graphics.DrawRectangle(draw, 230, 240, 4, 8); inside sink
+                    //e.Graphics.DrawRectangle(draw, 45, 300, 4, 8); inside tub
+
+                    ////Room 3
+
+                    //e.Graphics.DrawRectangle(draw, 308, 340, 50, 50);
+                    Rectangle counterOne = new Rectangle(308, 340, 50, 50);
+                    //e.Graphics.DrawRectangle(draw, 358, 340, 50, 50);
+                    Rectangle counterTwo = new Rectangle(358, 340, 50, 50);
+                    //e.Graphics.DrawRectangle(draw, 408, 340, 50, 50);
+                    Rectangle counterThree = new Rectangle(408, 340, 50, 50);
+                    //e.Graphics.DrawRectangle(draw, 458, 340, 50, 50);
+                    Rectangle counterFour = new Rectangle(458, 340, 50, 50);
+                    //e.Graphics.DrawRectangle(draw, 658, 340, 50, 50);
+                    Rectangle counterFive = new Rectangle(658, 340, 50, 50);
+
+
+                    //e.Graphics.DrawRectangle(draw, 508, 340, 75, 50);
+                    Rectangle kitchensink = new Rectangle(508, 340, 75, 50);
+
+                    //e.Graphics.DrawRectangle(draw, 583, 340, 75, 50);
+                    Rectangle stove = new Rectangle(583, 340, 75, 50);
+
+                    ////interactiveObjects(708, 340, 50, 50);
+                    Rectangle fridgeOne = new Rectangle(708, 340, 50, 50);
+
+                    ////interactiveObjects(708, 330, 50, 10);
+                    Rectangle fridgeTwo = new Rectangle(708, 330, 50, 10);
+
+                    //e.Graphics.DrawRectangle(draw, 468, 260, 30, 20);
+                    Rectangle chairOne = new Rectangle(468, 260, 30, 20);
+
+                    //e.Graphics.DrawRectangle(draw, 518, 260, 30, 20);
+                    Rectangle chairTwo = new Rectangle(518, 260, 30, 20);
+
+                    //e.Graphics.DrawRectangle(draw, 458, 270, 100, 40);
+                    Rectangle table = new Rectangle(458, 270, 100, 40);
+
+                    ////Room 4
+                    //e.Graphics.DrawRectangle(draw, 483, 55, 60, 20);
+                    Rectangle couchOne = new Rectangle(483, 55, 60, 20);
+                    ////interactiveObjects(483, 155, 60, 20);
+                    Rectangle couchTwo = new Rectangle(483, 155, 60, 20);
+                    //e.Graphics.DrawRectangle(draw, 493, 75, 50, 40);
+                    Rectangle couchThree = new Rectangle(493, 75, 50, 40);
+                    //e.Graphics.DrawRectangle(draw, 493, 115, 50, 40);
+                    Rectangle couchFour = new Rectangle(493, 115, 50, 40);
+                    //e.Graphics.DrawRectangle(draw, 523, 75, 20, 80);
+                    Rectangle couchFive = new Rectangle(523, 75, 20, 80);
+
+                    //e.Graphics.DrawRectangle(draw, 363, 70, 20, 80);
+                    Rectangle tv = new Rectangle(363, 70, 20, 80);
+                    //e.Graphics.DrawRectangle(draw, 708, 55, 20, 20);
+                    Rectangle officechair = new Rectangle(708, 55, 20, 20);
+                    //e.Graphics.DrawRectangle(draw, 718, 25, 40, 80);
+                    Rectangle desk = new Rectangle(718, 25, 40, 80);
+                    //e.Graphics.DrawRectangle(draw, 733, 55, 15, 20);
+                    Rectangle computer = new Rectangle(733, 55, 15, 20);
 
                     break;
                 case 11://guyone house scene
