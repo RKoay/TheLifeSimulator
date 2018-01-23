@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace TheLifeSimulator
 {
@@ -18,13 +19,17 @@ namespace TheLifeSimulator
         int drawX = 728;
         int drawY = 165;
         SolidBrush mainCharacterOne = new SolidBrush(Color.Tan);
-        SolidBrush mainCharacterTwo = new SolidBrush(Color.Black);
-        SolidBrush mainCharacterThr = new SolidBrush(Color.LightYellow);
-        SolidBrush mainCharacterFou = new SolidBrush(Color.SandyBrown);
         int bankSavings;
         Graphics onScreen, offScreen;
         Bitmap bm;
         Rectangle mainCharacter;
+        Rectangle tubOne;
+        Rectangle tubTwo;
+        Rectangle fridgeOne;
+        Rectangle fridgeTwo;
+        Rectangle doorAction;
+        Rectangle toiletTwoCover1;
+        Rectangle toiletTwoCover2;
 
         public mainMenu()
         {
@@ -60,16 +65,108 @@ namespace TheLifeSimulator
         Pen draw = new Pen(Color.Black, 3);
         SolidBrush fill = new SolidBrush(Color.White);
 
-        public void needsBar(int needsX, int needsY)
+        public void hungerBar(int needsX, int needsY, int total)
         {
             //creating method to create the needsbar
             Graphics Draw = instructionlabel.CreateGraphics();
             Pen drawNeeds = new Pen(Color.Black, 3);
             SolidBrush fillNeeds = new SolidBrush(Color.LightGreen);
             Draw.DrawRectangle(drawNeeds, needsX, needsY, 120, 20);
-            Draw.FillRectangle(fillNeeds, needsX, needsY, 120, 20);
+            Draw.FillRectangle(fillNeeds, needsX, needsY, total, 20);
+            if (scene == 10)
+            {
+                while (total == 120)
+                {
+                    total--;
+                }
+                if (fridgeOne.IntersectsWith(mainCharacter))
+                {
+                    total = total + 10;
+                }
+                if (fridgeTwo.IntersectsWith(mainCharacter))
+                {
+                    total = total + 10;
+                }
+            }
         }
-
+        public void entertainmentBar(int needsX, int needsY, int total)
+        {
+            //creating method to create the needsbar
+            Graphics Draw = instructionlabel.CreateGraphics();
+            Pen drawNeeds = new Pen(Color.Black, 3);
+            SolidBrush fillNeeds = new SolidBrush(Color.LightGreen);
+            Draw.DrawRectangle(drawNeeds, needsX, needsY, 120, 20);
+            Draw.FillRectangle(fillNeeds, needsX, needsY, total, 20);
+            if (scene == 10)
+            {
+                while (total == 250)
+                {
+                    total--;
+                }
+                if (doorAction.IntersectsWith(mainCharacter))
+                {
+                    total = total + 20;
+                }
+            }
+        }
+        public void loo(int needsX, int needsY, int total)
+        {
+            //creating method to create the needsbar
+            Graphics Draw = instructionlabel.CreateGraphics();
+            Pen drawNeeds = new Pen(Color.Black, 3);
+            SolidBrush fillNeeds = new SolidBrush(Color.LightGreen);
+            Draw.DrawRectangle(drawNeeds, needsX, needsY, 120, 20);
+            Draw.FillRectangle(fillNeeds, needsX, needsY, total, 20);
+            if (scene == 10)
+            {
+                while (total == 250)
+                {
+                    total--;
+                }
+                if (toiletTwoCover1.IntersectsWith(mainCharacter))
+                {
+                    drawX = 222;
+                    drawY = 355;
+                    total = 30 + total;
+                    
+                }
+                if (toiletTwoCover2.IntersectsWith(mainCharacter))
+                {
+                    drawX = 222;
+                    drawY = 355;
+                    total = 30 + total;
+                }
+                
+            }
+        }
+        public void hygieneBar(int needsX, int needsY, int total)
+        {
+            //creating method to create the needsbar
+            Graphics Draw = instructionlabel.CreateGraphics();
+            Pen drawNeeds = new Pen(Color.Black, 3);
+            SolidBrush fillNeeds = new SolidBrush(Color.LightGreen);
+            Draw.DrawRectangle(drawNeeds, needsX, needsY, 120, 20);
+            Draw.FillRectangle(fillNeeds, needsX, needsY, total, 20);
+            if (scene == 10)
+            {
+                while (total == 250)
+                {
+                    total--;
+                }
+                if (tubOne.IntersectsWith(mainCharacter))
+                {
+                    total = total + 10;
+                    drawX = 47;
+                    drawY = 350;
+                }
+                if (tubOne.IntersectsWith(mainCharacter))
+                {
+                    total = total + 10;
+                    drawX = 47;
+                    drawY = 350;
+                }
+            }
+        }
         public void workperfBar(int workX, int workY)
         {
             //creating method to create the needsbar
@@ -80,7 +177,15 @@ namespace TheLifeSimulator
             Draw.FillRectangle(fillNeeds, workX, workY, 0, 20);
 
         }
-        
+
+        private void nameinput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Y)
+            {
+                scene = 10;
+                username = nameinput.Text;
+            }
+        }
 
         private void mainMenu_Paint(object sender, PaintEventArgs e)
         {
@@ -284,6 +389,10 @@ namespace TheLifeSimulator
                 e.Graphics.FillRectangle(fill, 308, 225, 200, 5);
                 e.Graphics.FillRectangle(fill, 558, 225, 200, 5);
                 e.Graphics.FillRectangle(fill, 308, 125, 5, 265);
+
+                fill = new SolidBrush(Color.Black);
+                e.Graphics.FillRectangle(fill, 748, 205, 10, 20);
+
 
                 e.Graphics.FillRectangle(mainCharacterOne, drawX, drawY, 20, 20);
                 
@@ -589,8 +698,8 @@ namespace TheLifeSimulator
                     break;
 
                 case 10://girlone house scene
-                        simulatorClock.Enabled = true;
-
+                        Stopwatch time = new Stopwatch();
+                        time.Start();
                         this.BackColor = Color.AntiqueWhite;
                         
 
@@ -629,10 +738,10 @@ namespace TheLifeSimulator
                         loolabel.Text = "Loo";
                         hygienelabel.Text = "Hygiene";
 
-                        needsBar(250, 10);
-                        needsBar(250, 40);
-                        needsBar(250, 70);
-                        needsBar(250, 100);
+                        hungerBar(250, 10, 120);
+                        entertainmentBar(250, 40, 120);
+                        loo(250, 70, 120);
+                        hygieneBar(250, 100, 120);
 
                         imageO.Visible = true;///
                         imageT.Visible = false;///
@@ -704,11 +813,10 @@ namespace TheLifeSimulator
                     //Room 1
 
                     //e.Graphics.DrawRectangle(draw, 32, 5, 30, 40);
-                    Rectangle sidetableOneCover1 = new Rectangle(33, 5, 2, 40);
-                    Rectangle sidetableOneCover2 = new Rectangle(32, 43, 30, 2);
+                    Rectangle sidetableOneCover2 = new Rectangle(32, 5, 30, 40);
                     //e.Graphics.DrawRectangle(draw, 212, 5, 30, 40);
-                    Rectangle sidetableTwoCover1 = new Rectangle(212, 43, 30, 2);
-                    Rectangle sidetableTwoCover2 = new Rectangle(239, 5, 3, 40);
+                    Rectangle sidetableTwoCover1 = new Rectangle(212, 40, 30, 5);
+                    Rectangle sidetableTwoCover2 = new Rectangle(237, 5, 5, 40);
                     //e.Graphics.DrawRectangle(draw, 47, 185, 180, 40);
                     Rectangle dresser = new Rectangle(47, 185, 180, 40);
                     Rectangle dressercover = new Rectangle(47, 185, 180, 3);
@@ -728,25 +836,18 @@ namespace TheLifeSimulator
                     
                     if (sidetableOneCover2.IntersectsWith(mainCharacter))
                     {
-                        if (drawY < 45)
-                        {
                             drawY = 45;
-                        }
+                        
                     }
                     if (bedOne.IntersectsWith(mainCharacter))
                     {
-                        if (drawX > 42 )
-                        {
-                            drawX = 42;
-                        }
-
+                        drawX = 72;
+                        drawY = 65;
                     }
                     if (bedTwo.IntersectsWith(mainCharacter))
                     {
-                        if (drawX < 212)
-                        {
-                            drawX = 212;
-                        }
+                        drawX = 72;
+                        drawY = 65;
                     }
                     if (dresser.IntersectsWith(mainCharacter))
                     {
@@ -772,13 +873,9 @@ namespace TheLifeSimulator
                     }
                     if (sidetableTwoCover1.IntersectsWith(mainCharacter))
                     {
-                        if (drawY < 45)
-                        {
                             drawY = 45;
-                        }
-                        
                     }
-                    if (sidetableOneCover2.IntersectsWith(mainCharacter))
+                    if (sidetableTwoCover2.IntersectsWith(mainCharacter))
                     {
                         if (drawX < 242)
                         {
@@ -787,30 +884,29 @@ namespace TheLifeSimulator
                     }
                     if (bottomBlanket.IntersectsWith(mainCharacter))
                     {
-                        if (drawY < 163)
-                        {
-                            drawY = 163;
-                        }
+                        drawX = 72;
+                        drawY = 65;
                     }
                     //Room 2
                     ////interactiveObjects(17, 290, 60, 100);
-                    Rectangle tubOne = new Rectangle(17, 290, 60, 5);
-                    Rectangle tubTwo = new Rectangle(72, 290, 5, 100);
+                    tubOne = new Rectangle(17, 290, 60, 5);
+                    tubTwo = new Rectangle(72, 290, 5, 100);
                     //e.Graphics.DrawRectangle(draw, 22, 305, 50, 70); inside tub
-                    if (tubOne.IntersectsWith(mainCharacter))
-                    {
-                        if (drawY > 270)
-                        {
-                            drawY = 270;
-                        }
-                    }
-                    if (tubTwo.IntersectsWith(mainCharacter))
-                    {
-                        if (drawX < 77)
-                        {
-                            drawX = 77;
-                        }
-                    }
+                    //if (tubOne.IntersectsWith(mainCharacter))
+                    //{
+                    //    if (drawY > 270)
+                    //    {
+                    //        drawY = 270;
+                    //    }
+
+                    //}
+                    //if (tubTwo.IntersectsWith(mainCharacter))
+                    //{
+                    //    if (drawX < 77)
+                    //    {
+                    //        drawX = 77;
+                    //    }
+                    //}
 
                     //e.Graphics.DrawRectangle(draw, 202, 230, 60, 40);
                     Rectangle sinkOne = new Rectangle(202, 230, 5, 40);
@@ -832,18 +928,18 @@ namespace TheLifeSimulator
                     }
 
 
-                    //e.Graphics.DrawRectangle(draw, 207, 245, 50, 20);
-                    Rectangle toiletTwoCover1 = new Rectangle(207, 245, 5, 20);
-                    Rectangle toiletTwoCover2 = new Rectangle(207, 245, 50, 5);
-                    if (toiletTwoCover1.IntersectsWith(mainCharacter))
-                    {
-                            drawX = 207;
+                    //e.Graphics.DrawRectangle(draw, 207, 350, 50, 30);
+                    toiletTwoCover1 = new Rectangle(207, 350, 5, 20);
+                    toiletTwoCover2 = new Rectangle(207, 375, 50, 5);
+                    //if (toiletTwoCover1.IntersectsWith(mainCharacter))
+                    //{
+                    //        drawX = 207;
                         
-                    }
-                    if (toiletTwoCover2.IntersectsWith(mainCharacter))
-                    {
-                         drawY = 245;
-                    }
+                    //}
+                    //if (toiletTwoCover2.IntersectsWith(mainCharacter))
+                    //{
+                    //     drawY = 245;
+                    //}
                     ////interactiveObjects(207, 350, 50, 30); inside Sink
 
                     ////interactiveObjects(202, 380, 60, 10);
@@ -922,7 +1018,8 @@ namespace TheLifeSimulator
                     }
 
                     ////interactiveObjects(708, 340, 50, 50);
-                    Rectangle fridgeOne = new Rectangle(708, 340, 50, 50);
+                    fridgeOne = new Rectangle(708, 340, 50, 50);
+                    fridgeTwo = new Rectangle(708, 330, 50, 10);
                     if (fridgeOne.IntersectsWith(mainCharacter))
                     {
                         if (drawY > 320)
@@ -931,7 +1028,6 @@ namespace TheLifeSimulator
                         }
                     }
                     ////interactiveObjects(708, 330, 50, 10);
-                    Rectangle fridgeTwo = new Rectangle(708, 330, 50, 10);
                     if (fridgeTwo.IntersectsWith(mainCharacter))
                     {
                         if (drawY > 310)
@@ -1087,9 +1183,7 @@ namespace TheLifeSimulator
                     {
                         drawY = 105;
                     }
-                    
-
-
+                    Rectangle doorAction = new Rectangle(748, 205, 10, 20);
                     break;
                 case 11://guyone house scene
                     bankLabel.Location = new Point(400, 420);
@@ -1127,10 +1221,10 @@ namespace TheLifeSimulator
                     loolabel.Text = "Loo";
                     hygienelabel.Text = "Hygiene";
 
-                    needsBar(250, 10);
-                    needsBar(250, 40);
-                    needsBar(250, 70);
-                    needsBar(250, 100);
+                    hungerBar(250, 10, 120);
+                    entertainmentBar(250, 40, 120);
+                    loo(250, 70, 120);
+                    hygieneBar(250, 100, 120);
 
                     imageO.Visible = true;///
                     imageT.BackColor = Color.White;
@@ -1145,8 +1239,8 @@ namespace TheLifeSimulator
                     howtoplaylabel.Visible = false;///
                     instructionlabel.Visible = true;///
                     nameinput.Visible = false;///
-
                     break;
+
                 case 12://girltwo house scene
                     bankLabel.Location = new Point(400, 420);
                     bankLabel.BackColor = Color.Pink;
@@ -1183,10 +1277,10 @@ namespace TheLifeSimulator
                     loolabel.Text = "Loo";
                     hygienelabel.Text = "Hygiene";
 
-                    needsBar(250, 10);
-                    needsBar(250, 40);
-                    needsBar(250, 70);
-                    needsBar(250, 100);
+                    hungerBar(250, 10, 120);
+                    entertainmentBar(250, 40, 120);
+                    loo(250, 70, 120);
+                    hygieneBar(250, 100, 120);
 
                     imageO.Visible = true;///
                     imageT.BackColor = Color.White;
@@ -1238,10 +1332,10 @@ namespace TheLifeSimulator
                     loolabel.Text = "Loo";
                     hygienelabel.Text = "Hygiene";
 
-                    needsBar(250, 10);
-                    needsBar(250, 40);
-                    needsBar(250, 70);
-                    needsBar(250, 100);
+                    hungerBar(250, 10, 120);
+                    entertainmentBar(250, 40, 120);
+                    loo(250, 70, 120);
+                    hygieneBar(250, 100, 120);
 
                     imageO.Visible = true;///
                     imageT.BackColor = Color.White;
@@ -1276,12 +1370,6 @@ namespace TheLifeSimulator
 
                     break;
             }
-
-        }
-
-
-        private void nameinput_KeyDown(object sender, KeyEventArgs e)
-        {
 
         }
     }
